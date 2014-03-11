@@ -37,7 +37,7 @@
     <string name="form_validator_empty_password">Password could not be empty.</string>
     <string name="form_validator_empty_email">Email could not be empty.</string>
     <string name="form_validator_wrong_email">The email is not correct</string>
-    <string name="form_validator_different_passwords">Passwords must match</string>
+    <string name="form_validator_different_passwords">Passwords must match.</string>
     <string name="form_validator_empty_content">Content could not be empty.</string>
 
     <!-- Profile Change Fragment -->

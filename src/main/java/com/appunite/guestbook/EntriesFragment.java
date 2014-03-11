@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appunite.guestbook.adapter.EntryAdapter;
+import com.appunite.guestbook.api.GuestbookApi;
 import com.appunite.guestbook.content.UserPreferences;
 import com.appunite.guestbook.dialogs.EntryDialog;
 import com.appunite.guestbook.dialogs.NewEntryDialog;
@@ -35,7 +36,6 @@ import com.appunite.guestbook.dialogs.NewEntryDialog.NewEntryListener;
 import com.appunite.guestbook.helpers.data.ApiAsyncLoader;
 import com.appunite.guestbook.helpers.data.Result;
 import com.appunite.syncer.AUSyncerStatus;
-import com.appunite.syncer.DownloadHelper;
 import com.appunite.syncer.DownloadHelper.DownloadReceiver;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
@@ -52,13 +52,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class EntriesFragment extends ErrorHelperApiLoaderFragment<Result<String>>
         implements AdapterView.OnItemClickListener, NewEntryListener {
-
-    private DownloadReceiver mReceiver = new DownloadReceiver() {
-        @Override
-        protected void onReceive(Uri uri, AUSyncerStatus status) {
-            Log.e("RECEIVE", "RECEIVE");
-        }
-    };
 
     private static class EntriesLoader extends ApiAsyncLoader<String> {
 
@@ -93,7 +86,7 @@ public class EntriesFragment extends ErrorHelperApiLoaderFragment<Result<String>
     @Inject
     EntryAdapter mAdapter;
     @Inject
-    UserPreferences mAppPreferences;
+    UserPreferences mUserPreferences;
     @Inject
     Resources mResources;
     @Inject
@@ -124,17 +117,16 @@ public class EntriesFragment extends ErrorHelperApiLoaderFragment<Result<String>
         super.onViewCreated(view, savedInstanceState);
         mEntriesList.setAdapter(mAdapter);
         mEntriesList.setOnItemClickListener(this);
-        mIsUserLogged = mAppPreferences.isLoggedIn();
+        mIsUserLogged = mUserPreferences.isLoggedIn();
         mGoogleApiClient.connect();
     }
 
     private void setUserInfo() {
-        mUserName.setText(mAppPreferences.getUserName());
-        mPicasso.load(mAppPreferences.getUserPhoto())
+        mUserName.setText(mUserPreferences.getUserName());
+        mPicasso.load(mUserPreferences.getUserPhoto())
                 .fit()
                 .into(mUserAvatar);
 
-        Log.e("URL", "" + mAppPreferences.getUserPhoto());
 
 //        Bitmap avatar = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ava);
 //
@@ -203,15 +195,8 @@ public class EntriesFragment extends ErrorHelperApiLoaderFragment<Result<String>
     @OnClick(R.id.entry_button)
     public void onEntryClick() {
         newEntryDialog = NewEntryDialog.newInstance(this);
+        newEntryDialog.setListener(this);
         newEntryDialog.show(getChildFragmentManager(), NEW_ENTRY_DIALOG);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-            newEntryDialog = NewEntryDialog.newInstance(this);
-            newEntryDialog.setTargetFragment(this, 123);
-
     }
 
     @OnClick(R.id.logout_button)
@@ -253,12 +238,14 @@ public class EntriesFragment extends ErrorHelperApiLoaderFragment<Result<String>
 
     @Override
     public void onNewEntryFinish(String content) {
-//        Bundle bundle = new Bundle();
-//        bundle.putString("CONTENT", content);
-//        Uri uri = Uri.parse("content://com.example/login");
-//        DownloadHelper.startAsyncDownload(getActivity(), "string", uri, bundle, true);
-
         mAdapter.addData(content);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(!mIsUserLogged){
+            mUserPreferences.edit().clear().commit();
+        }
+    }
 }

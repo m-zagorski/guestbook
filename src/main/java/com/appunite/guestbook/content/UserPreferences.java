@@ -13,10 +13,10 @@ import javax.inject.Singleton;
 @Singleton
 public class UserPreferences {
 
-    public static class AppPreferencesEditor {
+    public static class UserPreferencesEditor {
         private Editor mEditor;
 
-        AppPreferencesEditor(SharedPreferences preferences) {
+        UserPreferencesEditor(SharedPreferences preferences) {
             mEditor = preferences.edit();
         }
 
@@ -24,32 +24,32 @@ public class UserPreferences {
             return mEditor.commit();
         }
 
-        public AppPreferencesEditor clear() {
+        public UserPreferencesEditor clear() {
             mEditor.clear();
             return this;
         }
 
-        public AppPreferencesEditor setLoggedIn(boolean isLoggedIn) {
+        public UserPreferencesEditor setLoggedIn(boolean isLoggedIn) {
             mEditor.putBoolean(IS_LOGGED_IN, isLoggedIn);
             return this;
         }
 
-        public AppPreferencesEditor setUserGuid(String userGuid) {
+        public UserPreferencesEditor setUserGuid(String userGuid) {
             mEditor.putString(USER_GUID, userGuid);
             return this;
         }
 
-        public AppPreferencesEditor setUserEmail(String userEmail) {
+        public UserPreferencesEditor setUserEmail(String userEmail) {
             mEditor.putString(USER_EMAIL, userEmail);
             return this;
         }
 
-        public AppPreferencesEditor setUserName(String userName) {
+        public UserPreferencesEditor setUserName(String userName) {
             mEditor.putString(USER_NAME, userName);
             return this;
         }
 
-        public AppPreferencesEditor setUserPhoto(String userPhoto) {
+        public UserPreferencesEditor setUserPhoto(String userPhoto) {
             mEditor.putString(USER_PHOTO, userPhoto);
             return this;
         }
@@ -70,8 +70,8 @@ public class UserPreferences {
         mPreferences = context.getSharedPreferences(PREFERENCES_NAME, 0);
     }
 
-    public AppPreferencesEditor edit() {
-        return new AppPreferencesEditor(mPreferences);
+    public UserPreferencesEditor edit() {
+        return new UserPreferencesEditor(mPreferences);
     }
 
     public boolean isLoggedIn() {

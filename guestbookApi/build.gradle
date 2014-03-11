@@ -1,0 +1,24 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {url 'https://commondatastorage.googleapis.com/maven-repository/'}
+    }
+}
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+    maven {url 'https://commondatastorage.googleapis.com/maven-repository/'}
+}
+dependencies {
+    compile 'com.squareup.okhttp:okhttp:1.2.1'
+    compile 'com.google.http-client:google-http-client-gson:1.17.0-rc'
+    compile 'com.google.http-client:google-http-client:1.17.0-rc'
+    compile "com.google.guava:guava:14.0.1"
+    compile "com.google.code.gson:gson:2.2.4"
+    compile "net.sf.oval:oval:1.83"
+    compile "org.json:json:20131018"
+    compile 'com.squareup.dagger:dagger-compiler:1.1.0'
+    compile 'com.squareup.dagger:dagger:1.1.0'
+}

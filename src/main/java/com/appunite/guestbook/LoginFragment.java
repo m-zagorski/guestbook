@@ -6,6 +6,7 @@ import android.content.IntentSender;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.IntentCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.Conne
     @InjectView(android.R.id.progress)
     ProgressBar mProgressBar;
     @Inject
-    UserPreferences mAppPreferences;
+    UserPreferences mUserPreferences;
     @Inject
     GoogleApiClient mGoogleApiClient;
 
@@ -46,7 +47,6 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.Conne
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mGoogleApiClient.registerConnectionCallbacks(this);
         mGoogleApiClient.registerConnectionFailedListener(this);
     }
@@ -67,6 +67,7 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.Conne
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
             if (resultCode != getActivity().RESULT_OK) {
                 mSignInClicked = false;
@@ -98,7 +99,7 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.Conne
 
         Person person = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
 
-        mAppPreferences.edit()
+        mUserPreferences.edit()
                 .setLoggedIn(true)
                 .setUserPhoto(person.getImage().getUrl())
                 .setUserName(person.getDisplayName())

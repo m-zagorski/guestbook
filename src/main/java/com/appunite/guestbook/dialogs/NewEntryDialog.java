@@ -7,6 +7,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -19,9 +20,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class NewEntryDialog extends DialogFragment implements TextWatcher{
+public class NewEntryDialog extends DialogFragment implements TextWatcher {
 
-    public interface NewEntryListener{
+    public interface NewEntryListener {
         void onNewEntryFinish(String content);
     }
 
@@ -34,8 +35,21 @@ public class NewEntryDialog extends DialogFragment implements TextWatcher{
     TextView mCharLimit;
 
     private FormValidator mFormValidator;
+    private NewEntryListener mListener;
 
-    public static NewEntryDialog newInstance(NewEntryListener listener){
+    public void setListener(NewEntryListener listener) {
+        Log.e("Dialog", "Listener has been set");
+        mListener = listener;
+
+        if(mListener == null) {
+        Log.e("LISTENER IS NULL", "LISTENER IS NULL");
+        } else {
+            Log.e("LISTENER IS NOT NULL", "LISTENER IS NOT NULL");
+        }
+
+    }
+
+    public static NewEntryDialog newInstance(NewEntryListener listener) {
         NewEntryDialog newEntryDialog = new NewEntryDialog();
         newEntryDialog.setTargetFragment((Fragment) listener, TARGET_REQ_CODE);
         return newEntryDialog;
@@ -43,6 +57,7 @@ public class NewEntryDialog extends DialogFragment implements TextWatcher{
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Log.e("On", "ON CREATE DIALOG");
         final View view = getActivity().getLayoutInflater().inflate(R.layout.new_entry_dialog_layout, null);
         ButterKnife.inject(this, view);
         mFormValidator = new FormValidator(getActivity(), view);
@@ -73,15 +88,22 @@ public class NewEntryDialog extends DialogFragment implements TextWatcher{
     }
 
     @OnClick(R.id.new_entry_dialog_add)
-    public void onAddEntryClick(){
-     addNewEntry();
+    public void onAddEntryClick() {
+        addNewEntry();
     }
 
-    private void addNewEntry(){
-        if(!mFormValidator.validateContent()){
+    private void addNewEntry() {
+        if (!mFormValidator.validateContent()) {
             return;
         }
-        ((NewEntryListener) getTargetFragment()).onNewEntryFinish(mContent.getText().toString());
-        this.dismiss();
+        // ((NewEntryListener) getTargetFragment()).onNewEntryFinish(mContent.getText().toString());
+//        mListener.onNewEntryFinish(mContent.getText().toString());
+//        this.dismiss();
+
+        if (mListener == null) {
+            Log.e("Dialog", "LISTENRE IS NULL");
+        } else {
+            Log.e("DIALOG", "LISTENER IS NOT NULL");
+        }
     }
 }
