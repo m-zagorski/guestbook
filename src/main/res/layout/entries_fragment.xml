@@ -6,6 +6,11 @@
                 android:background="@android:color/white">
 
     <RelativeLayout
+        android:id="@+id/entries_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <RelativeLayout
         android:id="@+id/guest_information"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -40,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/user_header_bg"
+        android:layout_alignParentTop="true"
         android:visibility="gone">
 
         <ImageView
@@ -91,6 +97,8 @@
 
     </RelativeLayout>
 
+    </RelativeLayout>
+
     <Button
         android:id="@+id/entry_button"
         android:layout_width="match_parent"
@@ -112,8 +120,8 @@
         android:dividerHeight="1dp"
         android:scrollbars="none"
         android:layout_above="@id/entry_button"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="?attr/actionBarSize"/>
+        android:layout_marginBottom="2dp"
+        android:layout_below="@id/entries_header"/>
 
     <ProgressBar
         android:id="@android:id/progress"
