@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="application_bg">#94846E</color>
+    <color name="progress_bar">#6BCBCA</color>
+
+    <!-- User Information -->
+    <color name="user_header_bg">#6BCBCA</color>
+    <color name="user_header_text">#222222</color>
+
+    <!-- Entries Fragment -->
+    <color name="entry_button_bg">#FF6766</color>
+    <color name="error_bg">#FF6766</color>
+    <color name="entry_author_date">#485969</color>
+    <color name="entry_list_divider">#6BCBCA</color>
+    <color name="entry_list_selected_bg">#222222</color>
+    <color name="entry_list_not_selected_text">#222222</color>
+
+    <!-- Dialogs -->
+    <color name="dialog_entry_bg">#222222</color>
+    <color name="new_entry_dialog_content_color">#222222</color>
+
+    <!-- Login Fragments -->
+    <color name="header_login_bg">#6BCBCA</color>
+    <color name="header_bg">#97CE68</color>
+    <color name="login_info">#FF6766</color>
+    <color name="google_sign_color">#dd4b39</color>
+    <color name="login_form_bottom_bg">#EDEDE4</color>
+    <color name="signin_button">#FF6766</color>
+
+    <!-- Settings Fragment -->
+    <color name="settings_label">#6BCBCA</color>
+
+</resources>

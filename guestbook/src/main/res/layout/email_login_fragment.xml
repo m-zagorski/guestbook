@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/horizontal_margins"
+        android:layout_marginRight="@dimen/horizontal_margins"
+        android:layout_marginBottom="@dimen/vertical_margins"
+        android:layout_marginTop="@dimen/vertical_margins"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="350dp"
+            android:background="@drawable/login_forms_bg">
+
+            <TextView
+                android:id="@+id/login_header"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/login_header_bg"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="@string/email_login_header"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="50dp"/>
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_field"
+                android:layout_below="@id/login_header"
+                android:drawableLeft="@drawable/ic_action_email"
+                android:drawablePadding="5dp"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/edittext_bg"/>
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password_field"
+                android:layout_below="@id/email"
+                android:drawableLeft="@drawable/ic_action_accounts"
+                android:drawablePadding="5dp"
+                android:inputType="textPassword"
+                android:background="@drawable/edittext_bg"/>
+
+            <Button
+                android:id="@+id/signin_button"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:minHeight="35dp"
+                android:background="@color/signin_button"
+                android:layout_centerHorizontal="true"
+                android:text="@string/email_login_signin_button"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:layout_below="@id/password"
+                android:layout_marginTop="60dp"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@android:id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:indeterminateDrawable="@drawable/progress_bar"
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/error_layout"
+        layout="@layout/error_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
+</RelativeLayout>

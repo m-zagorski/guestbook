@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/login_forms_bg">
+
+    <TextView
+        android:id="@+id/new_entry_dialog_header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/login_header_bg"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:text="@string/new_entry_dialog_header"/>
+
+    <EditText
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/new_entry_dialog_header"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
+        android:maxLength="200"
+        android:hint="@string/new_entry_add_content"
+        android:textColor="@color/new_entry_dialog_content_color"
+        android:background="@android:color/white"/>
+
+    <Button
+        android:id="@+id/new_entry_dialog_add"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:minHeight="35dp"
+        android:background="@color/signin_button"
+        android:layout_centerHorizontal="true"
+        android:text="@string/new_entry_add_button"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_below="@id/content"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/new_entry_dialog_char_limit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:paddingRight="20dp"
+        android:textColor="@color/new_entry_dialog_content_color"
+        android:textSize="20sp"
+        android:layout_below="@id/content"/>
+
+</RelativeLayout>

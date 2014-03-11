@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/login_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/horizontal_margins"
+        android:layout_marginRight="@dimen/horizontal_margins"
+        android:layout_marginBottom="@dimen/vertical_margins"
+        android:layout_marginTop="@dimen/vertical_margins"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="350dp"
+            android:background="@drawable/login_forms_bg">
+
+            <TextView
+                android:id="@+id/login_header"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/login_header_bg"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="@string/login_options_header"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="50dp"/>
+
+            <Button
+                android:id="@+id/google_sign_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/login_header"
+                android:text="@string/login_google_button"
+                android:textColor="@android:color/white"
+                android:background="@drawable/login_button_bg"
+                android:drawableLeft="@drawable/ic_google_signin"
+                android:drawablePadding="5dp"
+                android:padding="5dp"/>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/login_form_bottom_bg"
+                android:layout_below="@id/google_sign_button"
+                android:layout_marginTop="50dp"/>
+
+            <Button
+                android:id="@+id/sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_signin_email_button"
+                android:textSize="16sp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/ic_action_email"
+                android:layout_marginRight="20dp"
+                android:drawablePadding="5dp"
+                android:layout_below="@id/divider"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:id="@+id/sign_up_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_signup_email_button"
+                android:textSize="16sp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/ic_action_new"
+                android:drawablePadding="5dp"
+                android:layout_below="@id/sign_in_button"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignStart="@id/sign_in_button"/>
+
+            <ProgressBar
+                android:id="@android:id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:indeterminateDrawable="@drawable/progress_bar"/>
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,16 @@
+<resources>
+
+    <style name="_EditProfileText" parent="android:Widget.TextView">
+    </style>
+
+    <style name="EditProfileText" parent="_EditProfileText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/settings_label</item>
+        <item name="android:paddingLeft">@dimen/activity_vertical_margin</item>
+        <item name="android:background">@drawable/bg_blue_header</item>
+    </style>
+</resources>

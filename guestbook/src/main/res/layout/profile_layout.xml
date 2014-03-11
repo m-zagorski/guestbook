@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/profile_photo"
+        android:layout_width="@dimen/profile_photo_size"
+        android:layout_height="@dimen/profile_photo_size"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile_photo"
+        android:layout_marginLeft="@dimen/space_between"
+        android:layout_centerVertical="true"
+        android:text="Example Profile Name"/>
+
+    <ImageButton
+        android:id="@+id/logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:contentDescription="@string/profile_logout_button_desc"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_action_settings"/>
+
+    <ImageButton
+        android:id="@+id/settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/logout_button"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/space_between"
+        android:contentDescription="@string/profile_settings_button_desc"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_action_settings"/>
+
+</RelativeLayout>
