@@ -77,6 +77,10 @@ public class MainActivity extends BaseActivity {
             Fragment fragment = EditProfileFragment.newInstance();
             ft.replace(R.id.main_content, fragment);
             ft.addToBackStack(null);
+        } else if(AppConsts.ACTION_SHOW_NEW_ENTRY.equals(action)) {
+            Fragment fragment = NewEntryFragment.newInstance();
+            ft.replace(R.id.main_content, fragment);
+            ft.addToBackStack(null);
         } else {
             throw new RuntimeException("Unknown action: " + action);
         }

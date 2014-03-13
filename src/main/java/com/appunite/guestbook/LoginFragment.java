@@ -106,7 +106,11 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.Conne
                 .setUserEmail(Plus.AccountApi.getAccountName(mGoogleApiClient))
                 .commit();
 
-        Intent intent = new Intent(AppConsts.ACTION_SHOW_ENTRIES).addFlags(IntentCompat.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        openEntries();
+    }
+
+    private void openEntries(){
+        Intent intent = new Intent(AppConsts.ACTION_SHOW_ENTRIES);
         startActivity(intent);
     }
 
@@ -149,8 +153,9 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.Conne
 
     @OnClick(R.id.sign_in_button)
     public void onSigninClick() {
-        Intent intent = new Intent(AppConsts.ACTION_SHOW_EMAIL_LOGIN);
-        startActivity(intent);
+       openEntries();
+//        Intent intent = new Intent(AppConsts.ACTION_SHOW_EMAIL_LOGIN);
+//        startActivity(intent);
     }
 
     @OnClick(R.id.sign_up_button)

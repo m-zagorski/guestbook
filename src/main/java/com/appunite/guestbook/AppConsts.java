@@ -8,5 +8,6 @@ public class AppConsts {
     public static final String ACTION_SHOW_SIGNUP = PACKAGE + ".ACTION_SHOW_SIGNUP";
     public static final String ACTION_SHOW_EMAIL_LOGIN = PACKAGE + ".ACTION_SHOW_EMAIL_LOGIN";
     public static final String ACTION_SHOW_SETTINGS = PACKAGE + ".ACTION_SHOW_SETTINGS";
+    public static final String ACTION_SHOW_NEW_ENTRY = PACKAGE + ".ACTION_SHOW_NEW_ENTRY";
 
 }

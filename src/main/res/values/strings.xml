@@ -58,6 +58,11 @@
     <string name="new_entry_add_button">Add entry</string>
     <string name="new_entry_add_content">Enter your content here!</string>
 
+    <!-- New Entry Fragment -->
+    <string name="new_entry_header">Write new entry.</string>
+    <string name="new_entry_button">Add entry</string>
+    <string name="new_entry_content">Enter your content here!</string>
+
     <!-- Errors -->
     <string name="error_refresh">Click to refresh</string>
 

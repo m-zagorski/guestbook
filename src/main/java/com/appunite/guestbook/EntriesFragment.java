@@ -11,7 +11,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.util.Log;
@@ -28,15 +27,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appunite.guestbook.adapter.EntryAdapter;
-import com.appunite.guestbook.api.GuestbookApi;
 import com.appunite.guestbook.content.UserPreferences;
 import com.appunite.guestbook.dialogs.EntryDialog;
-import com.appunite.guestbook.dialogs.NewEntryDialog;
-import com.appunite.guestbook.dialogs.NewEntryDialog.NewEntryListener;
 import com.appunite.guestbook.helpers.data.ApiAsyncLoader;
 import com.appunite.guestbook.helpers.data.Result;
-import com.appunite.syncer.AUSyncerStatus;
-import com.appunite.syncer.DownloadHelper.DownloadReceiver;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.squareup.picasso.Picasso;
@@ -51,7 +45,7 @@ import butterknife.OnClick;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class EntriesFragment extends ErrorHelperApiLoaderFragment<Result<String>>
-        implements AdapterView.OnItemClickListener, NewEntryListener {
+        implements AdapterView.OnItemClickListener {
 
     private static class EntriesLoader extends ApiAsyncLoader<String> {
 
@@ -156,7 +150,6 @@ public class EntriesFragment extends ErrorHelperApiLoaderFragment<Result<String>
         return output;
     }
 
-
     @Override
     protected Loader<Result<String>> onCreateMainLoader(Bundle bundle) {
         return new EntriesLoader(getActivity());
@@ -191,22 +184,21 @@ public class EntriesFragment extends ErrorHelperApiLoaderFragment<Result<String>
         entryDialog.show(getChildFragmentManager(), ENTRY_DIALOG);
     }
 
-    NewEntryDialog newEntryDialog;
     @OnClick(R.id.entry_button)
     public void onEntryClick() {
-        newEntryDialog = NewEntryDialog.newInstance(this);
-        newEntryDialog.setListener(this);
-        newEntryDialog.show(getChildFragmentManager(), NEW_ENTRY_DIALOG);
+        Intent intent = new Intent(AppConsts.ACTION_SHOW_NEW_ENTRY);
+        startActivity(intent);
     }
 
     @OnClick(R.id.logout_button)
     public void onLogoutClick() {
-        mIsUserLogged = false;
-        updateUiComponents();
         if (mGoogleApiClient.isConnected()) {
+            mIsUserLogged = false;
+            updateUiComponents();
             Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
             mGoogleApiClient.disconnect();
             mGoogleApiClient.connect();
+            mUserPreferences.edit().clear().commit();
         }
     }
 
@@ -236,16 +228,4 @@ public class EntriesFragment extends ErrorHelperApiLoaderFragment<Result<String>
         toast.show();
     }
 
-    @Override
-    public void onNewEntryFinish(String content) {
-        mAdapter.addData(content);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(!mIsUserLogged){
-            mUserPreferences.edit().clear().commit();
-        }
-    }
 }

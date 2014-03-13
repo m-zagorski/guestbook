@@ -20,6 +20,9 @@
     <color name="dialog_entry_bg">#222222</color>
     <color name="new_entry_dialog_content_color">#222222</color>
 
+    <!-- New Entry Fragment -->
+    <color name="new_entry_text_color">#222222</color>
+
     <!-- Login Fragments -->
     <color name="header_login_bg">#6BCBCA</color>
     <color name="header_bg">#97CE68</color>

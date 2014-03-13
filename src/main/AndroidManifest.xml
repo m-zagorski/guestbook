@@ -32,6 +32,7 @@
                 <action android:name="com.appunite.guestbook.ACTION_SHOW_EMAIL_LOGIN"/>
                 <action android:name="com.appunite.guestbook.ACTION_SHOW_SIGNUP"/>
                 <action android:name="com.appunite.guestbook.ACTION_SHOW_SETTINGS"/>
+                <action android:name="com.appunite.guestbook.ACTION_SHOW_NEW_ENTRY"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
             </activity>
