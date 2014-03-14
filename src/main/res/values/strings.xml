@@ -26,6 +26,11 @@
     <string name="error_dialog_refresh_button">Refresh</string>
     <string name="error_dialog_continue_button">Continue</string>
 
+    <!-- Information Dialog -->
+    <string name="info_dialog_title">Anonymous user</string>
+    <string name="info_dialog_message">Anonymous users are unable to add new entries. Please log-in.</string>
+    <string name="info_dialog_dismiss_button">Dismiss</string>
+
     <!-- Email Login Fragment -->
     <string name="email_login_header">GuestBook - Sign in with Email</string>
     <string name="email_login_signin_button">Sign in</string>
