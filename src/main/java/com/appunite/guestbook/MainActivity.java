@@ -89,7 +89,6 @@ public class MainActivity extends BaseActivity {
 
     private void clearBackStack() {
         FragmentManager fm = getSupportFragmentManager();
-        Log.e("COUNT: ", "" + fm.getBackStackEntryCount());
         for(int i=0; i< fm.getBackStackEntryCount(); i++){
             fm.popBackStack();
         }

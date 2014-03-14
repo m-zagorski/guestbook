@@ -100,7 +100,7 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.Conne
     @Override
     public void onConnected(Bundle bundle) {
         mSignInClicked = false;
-        new GmailLogin().execute();
+        new FetchGoogleDataTask().execute();
     }
 
     private void resolveSignInError() {
@@ -124,8 +124,6 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.Conne
     public void onConnectionFailed(ConnectionResult result) {
         mProgressBar.setVisibility(View.GONE);
         if (!result.hasResolution()) {
-            GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(), getActivity(),
-                    0).show();
             return;
         }
 
@@ -139,8 +137,25 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.Conne
         }
     }
 
+    private boolean checkGoogleServices(){
+        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
+        if(status != ConnectionResult.SUCCESS){
+            GooglePlayServicesUtil.getErrorDialog(status, getActivity(), 0).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void launchProfileSettings() {
+        Intent intent = new Intent(AppConsts.ACTION_SHOW_ENTRIES);
+        startActivity(intent);
+    }
+
     @OnClick(R.id.google_sign_button)
     public void onGoogleSigninClick() {
+        if(!checkGoogleServices()){
+            return;
+        }
         if (!mGoogleApiClient.isConnecting() && !mSignInClicked) {
             mProgressBar.setVisibility(View.VISIBLE);
             mSignInClicked = true;
@@ -160,7 +175,7 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.Conne
         startActivity(intent);
     }
 
-    public class GmailLogin extends AsyncTask<Void, Void, String> {
+    public class FetchGoogleDataTask extends AsyncTask<Void, Void, String> {
 
         @Override
         protected String doInBackground(Void... params) {
@@ -196,21 +211,17 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.Conne
             if (response == null) {
                 launchProfileSettings();
             } else {
-                ErrorLoadingData dialog = new ErrorLoadingData(response);
+                FetchingDataErrorDialog dialog = new FetchingDataErrorDialog(response);
+                dialog.setCancelable(false);
                 dialog.show(getFragmentManager(), ERROR_DIALOG);
             }
         }
     }
 
-    private void launchProfileSettings() {
-        Intent intent = new Intent(AppConsts.ACTION_SHOW_ENTRIES);
-        startActivity(intent);
-    }
-
-    public class ErrorLoadingData extends DialogFragment {
+    public class FetchingDataErrorDialog extends DialogFragment {
         private String mErrorMessage;
 
-        public ErrorLoadingData(String errorMessage) {
+        public FetchingDataErrorDialog(String errorMessage) {
             mErrorMessage = errorMessage;
         }
 
@@ -222,7 +233,7 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.Conne
                     .setPositiveButton(getString(R.string.error_dialog_refresh_button), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            new GmailLogin().execute();
+                            new FetchGoogleDataTask().execute();
                         }
                     })
                     .setNegativeButton(getString(R.string.error_dialog_continue_button), new DialogInterface.OnClickListener() {

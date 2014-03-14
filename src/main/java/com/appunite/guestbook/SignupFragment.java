@@ -21,7 +21,7 @@ import butterknife.OnClick;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class SignupFragment extends ErrorHelperApiLoaderFragment<Result<Void>> {
+public class SignupFragment extends BaseFragment {
 
     @InjectView(R.id.email)
     EditText mEmail;
@@ -37,7 +37,7 @@ public class SignupFragment extends ErrorHelperApiLoaderFragment<Result<Void>> {
     }
 
     @Override
-    protected View onCreateChildView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return checkNotNull(inflater.inflate(R.layout.signup_fragment, container, false));
     }
 
@@ -48,25 +48,6 @@ public class SignupFragment extends ErrorHelperApiLoaderFragment<Result<Void>> {
         mPassword.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         mRetypedPassword.setImeOptions(EditorInfo.IME_ACTION_DONE);
         mFormValidator = new FormValidator(getActivity(), view);
-    }
-
-    @Override
-    protected boolean isScreenEmpty(Result<Void> result) {
-        return false;
-    }
-
-    @Override
-    protected Loader<Result<Void>> onCreateMainLoader(Bundle bundle) {
-        return null;
-    }
-
-    @Override
-    protected void onLoadMainReset() {
-    }
-
-    @Override
-    protected boolean initLoaderAtStart() {
-        return false;
     }
 
     private void performSignup() {
@@ -83,7 +64,7 @@ public class SignupFragment extends ErrorHelperApiLoaderFragment<Result<Void>> {
         if (!valid) {
             return;
         }
-        // TODO IMplement adding the data !
+        // TODO Add data to API and Prefs. Go to ? LoginForm or Profile Settings
     }
 
     @OnClick(R.id.new_entry_dialog_add)
