@@ -27,6 +27,9 @@ public class FormValidator {
     @Optional
     @InjectView(R.id.content)
     EditText mContent;
+    @Optional
+    @InjectView(R.id.username)
+    EditText mUsername;
 
     private Context mContext;
 
@@ -74,6 +77,15 @@ public class FormValidator {
         CharSequence content = mContent.getText();
         if (content == null || content.length() == 0) {
             mContent.setError(mContext.getResources().getString(R.string.form_validator_empty_content));
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateUsername() {
+        CharSequence content = mUsername.getText();
+        if (content == null || content.length() == 0) {
+            mUsername.setError(mContext.getResources().getString(R.string.form_validator_empty_username));
             return false;
         }
         return true;

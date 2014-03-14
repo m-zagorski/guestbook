@@ -18,6 +18,13 @@
     <string name="login_signin_email_button">Sign in with Email</string>
     <string name="login_signup_email_button">Sign up with Email</string>
     <string name="login_new_entry_communicate">To add new entry you have to be logged in!</string>
+    <string name="login_error_google">There was an error with the google client.</string>
+    <string name="login_error_connection">There was a problem with internet connection.</string>
+
+    <!-- Error Dialog -->
+    <string name="error_dialog_title">An error occurred</string>
+    <string name="error_dialog_refresh_button">Refresh</string>
+    <string name="error_dialog_continue_button">Continue</string>
 
     <!-- Email Login Fragment -->
     <string name="email_login_header">GuestBook - Sign in with Email</string>
@@ -39,6 +46,7 @@
     <string name="form_validator_wrong_email">The email is not correct</string>
     <string name="form_validator_different_passwords">Passwords must match.</string>
     <string name="form_validator_empty_content">Content could not be empty.</string>
+    <string name="form_validator_empty_username">Username could not be empty.</string>
 
     <!-- Profile Change Fragment -->
     <string name="edit_profile_header">GuestBook - Profile Settings</string>

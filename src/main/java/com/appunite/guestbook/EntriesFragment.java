@@ -11,9 +11,9 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +63,6 @@ public class EntriesFragment extends ErrorHelperApiLoaderFragment<Result<String>
     }
 
     private static final String ENTRY_DIALOG = "entry_dialog";
-    private static final String NEW_ENTRY_DIALOG = "new_entry_dialog";
 
     @InjectView(R.id.profile_header)
     RelativeLayout mProfileHeader;
@@ -117,8 +116,10 @@ public class EntriesFragment extends ErrorHelperApiLoaderFragment<Result<String>
 
     private void setUserInfo() {
         mUserName.setText(mUserPreferences.getUserName());
-        mPicasso.load(mUserPreferences.getUserPhoto())
+        mPicasso.load(Uri.parse(mUserPreferences.getUserPhoto()))
                 .fit()
+                .placeholder(R.drawable.no_photo)
+                .error(R.drawable.no_photo)
                 .into(mUserAvatar);
 
 
@@ -192,9 +193,9 @@ public class EntriesFragment extends ErrorHelperApiLoaderFragment<Result<String>
 
     @OnClick(R.id.logout_button)
     public void onLogoutClick() {
+        mIsUserLogged = false;
+        updateUiComponents();
         if (mGoogleApiClient.isConnected()) {
-            mIsUserLogged = false;
-            updateUiComponents();
             Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
             mGoogleApiClient.disconnect();
             mGoogleApiClient.connect();

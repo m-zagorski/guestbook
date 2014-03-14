@@ -43,8 +43,6 @@ public class EditProfileFragment extends ErrorHelperApiLoaderFragment<Result<Str
     UserPreferences mAppPreferences;
 
     private Uri mImageUri;
-    private String mProfileEmail;
-    private String mProfileUsername;
     private FormValidator mFormValidator;
 
     public static EditProfileFragment newInstance() {
@@ -92,6 +90,8 @@ public class EditProfileFragment extends ErrorHelperApiLoaderFragment<Result<Str
     private void loadImage() {
         mPicasso.load(mImageUri)
                 .fit()
+                .placeholder(R.drawable.no_photo)
+                .error(R.drawable.no_photo)
                 .into(mProfilePhoto);
     }
 
@@ -111,10 +111,29 @@ public class EditProfileFragment extends ErrorHelperApiLoaderFragment<Result<Str
     }
 
     private void changeUserDetails(){
+        boolean valid = true;
         if(!mFormValidator.validateEmail()){
+            valid = false;
+        }
+        if(!mFormValidator.validateUsername()){
+            valid = false;
+        }
+        if(!valid){
             return;
         }
         // TODO Send to API.
+        saveUserDetails();
+        Intent intent = new Intent(AppConsts.ACTION_SHOW_ENTRIES);
+        startActivity(intent);
+    }
+
+    private void saveUserDetails(){
+        mAppPreferences.edit()
+                .setLoggedIn(true)
+                .setUserName(mUsername.getText().toString())
+                .setUserPhoto(mImageUri.toString())
+                .setUserEmail(mEmail.getText().toString())
+                .commit();
     }
 
     @OnClick(R.id.edit_profile_photo)
@@ -128,14 +147,5 @@ public class EditProfileFragment extends ErrorHelperApiLoaderFragment<Result<Str
     @OnClick(R.id.save_profile_settings)
     public void onSaveSettingsClick() {
         changeUserDetails();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mAppPreferences.edit()
-                .setUserName(mUsername.getText().toString())
-                .setUserPhoto(mImageUri.toString())
-                .commit();
     }
 }

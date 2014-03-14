@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.util.Log;
-import android.view.Menu;
 
 public class MainActivity extends BaseActivity {
+
+    private static final String LOGIN_FRAGMENT = "login_fragment";
 
     /**
      * Because when activity is recreated there are called onCreate and
@@ -59,11 +59,12 @@ public class MainActivity extends BaseActivity {
         String action = intent.getAction();
 
         if (AppConsts.ACTION_SHOW_ENTRIES.equals(action)) {
+            clearBackStack();
             Fragment fragment = EntriesFragment.newInstance();
             ft.replace(R.id.main_content, fragment);
         } else if (AppConsts.ACTION_SHOW_LOGIN.equals(action)) {
             Fragment fragment = LoginFragment.newInstance();
-            ft.replace(R.id.main_content, fragment);
+            ft.replace(R.id.main_content, fragment, LOGIN_FRAGMENT);
             ft.addToBackStack(null);
         } else if (AppConsts.ACTION_SHOW_EMAIL_LOGIN.equals(action)) {
             Fragment fragment = EmailLoginFragment.newInstance();
@@ -77,12 +78,20 @@ public class MainActivity extends BaseActivity {
             Fragment fragment = EditProfileFragment.newInstance();
             ft.replace(R.id.main_content, fragment);
             ft.addToBackStack(null);
-        } else if(AppConsts.ACTION_SHOW_NEW_ENTRY.equals(action)) {
+        } else if (AppConsts.ACTION_SHOW_NEW_ENTRY.equals(action)) {
             Fragment fragment = NewEntryFragment.newInstance();
             ft.replace(R.id.main_content, fragment);
             ft.addToBackStack(null);
         } else {
             throw new RuntimeException("Unknown action: " + action);
+        }
+    }
+
+    private void clearBackStack() {
+        FragmentManager fm = getSupportFragmentManager();
+        Log.e("COUNT: ", "" + fm.getBackStackEntryCount());
+        for(int i=0; i< fm.getBackStackEntryCount(); i++){
+            fm.popBackStack();
         }
     }
 
@@ -93,6 +102,15 @@ public class MainActivity extends BaseActivity {
             fm.popBackStack();
         } else {
             this.finish();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(LOGIN_FRAGMENT);
+        if (fragment != null) {
+           fragment.onActivityResult(requestCode, resultCode, data);
         }
     }
 }

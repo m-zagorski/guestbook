@@ -88,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:indeterminateDrawable="@drawable/progress_bar"/>
+                android:indeterminateDrawable="@drawable/progress_bar"
+                android:visibility="gone"/>
         </RelativeLayout>
 
     </ScrollView>
